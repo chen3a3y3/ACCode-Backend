@@ -1,0 +1,23 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - echo Install started on `date`
+  pre_build:
+    commands:
+      - echo Pre Build started on `date`
+      - wget https://s3.amazonaws.com/jz8bw-test-android-build/licenses.tar.gz
+      - tar -xvf licenses.tar.gz -C /usr/local/android-sdk-linux/
+  build:
+    commands:
+      - echo Build started on `date`
+      - ./gradlew assembleDebug
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - app/build/outputs/apk/debug/app-debug.apk
+  discard-paths: yes
+
